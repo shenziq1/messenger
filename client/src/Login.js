@@ -10,10 +10,41 @@ import {
   TextField,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import { makeStyles} from "@material-ui/core/styles";
+import BackgroundImage from "./components/BackgroundImage";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    position: "relative",
+  },
+  blueButton: {
+    color: "white",
+    background: "rgba(58, 141, 255, 1)",
+    height: "50px",
+    width: "120px",
+  },
+  whiteButton: {
+    color: "rgba(58, 141, 255, 1)",
+    background: "white",
+    height: "50px",
+    width: "120px",
+  },
+  header: {
+    fontSize: 30,
+  },
+  form: {
+    height: "600px",
+    width: "400px",
+  },
+  text: {
+    color: "grey",
+  }
+}));
 
 const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
+  const classes = useStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -28,38 +59,55 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
+    <Grid container justify="center" className={classes.root}>
+      <BackgroundImage/>
       <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
+        <Box display="flex" mr={2} p={2}>
+          <Box display="flex" m={1} p={1}>
+            <Typography className={classes.text}>Don't have an account?</Typography>
+          </Box>
+          <Button variant="contained" className = {classes.whiteButton} onClick={() => history.push("/register")}>Register</Button>
+        </Box>
+        <form onSubmit={handleLogin} className={classes.form}>
+          <Box justifyContent="center" m={2} p={2}>
             <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
+              <Typography
+                className={classes.header}
+                style = {{marginBottom: 45}}
+              >
+                Welcome back!
+              </Typography>
+              <Grid>
+                <Typography className={classes.text}>Username</Typography>
+                <FormControl margin="normal" required>
+                  <TextField
+                    aria-label="username"
+                    label="Username"
+                    name="username"
+                    type="text"
+                    style = {{width: 400, marginBottom: 45}}
+                    required
+                  />
+                </FormControl>
+              </Grid>
+                <Typography className={classes.text}>password</Typography>
+                <FormControl margin="normal" required>
+                  <TextField
+                    label="password"
+                    aria-label="password"
+                    type="password"
+                    name="password"
+                    style = {{width: 400, marginBottom: 45}}
+                    required
+                  />
+                </FormControl>
+              <Grid>
+                <Button type="submit" variant="contained" size="large" className={classes.blueButton}>
+                  Login
+                </Button>
+              </Grid>
             </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
+          </Box>
         </form>
       </Box>
     </Grid>
