@@ -21,13 +21,13 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     background: "rgba(58, 141, 255, 1)",
     height: "50px",
-    width: "80px",
+    width: "120px",
   },
   whiteButton: {
     color: "rgba(58, 141, 255, 1)",
     background: "white",
     height: "50px",
-    width: "80px",
+    width: "120px",
   },
   header: {
     fontSize: 30,
@@ -64,7 +64,7 @@ const Login = (props) => {
       <Box>
         <Box display="flex" mr={2} p={2}>
           <Box display="flex" m={1} p={1}>
-            <Typography className={classes.text}>Already have an account?</Typography>
+            <Typography className={classes.text}>Don't have an account?</Typography>
           </Box>
           <Button variant="contained" className = {classes.whiteButton} onClick={() => history.push("/register")}>Register</Button>
         </Box>
